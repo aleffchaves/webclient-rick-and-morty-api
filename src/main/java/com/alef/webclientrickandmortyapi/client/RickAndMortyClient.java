@@ -2,12 +2,14 @@ package com.alef.webclientrickandmortyapi.client;
 
 import com.alef.webclientrickandmortyapi.response.CharacterResponse;
 import com.alef.webclientrickandmortyapi.response.EpisodeResponse;
+import com.alef.webclientrickandmortyapi.response.ListOfEpisodesResponse;
 import com.alef.webclientrickandmortyapi.response.LocationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -21,6 +23,7 @@ public class RickAndMortyClient {
     }
 
     public Mono<CharacterResponse> findCharacterById(String id) {
+        log.info("find an character by id");
         return webClient
                 .get()
                 .uri("/character/" + id)
@@ -32,6 +35,7 @@ public class RickAndMortyClient {
     }
 
     public Mono<LocationResponse> findLocationById(String id) {
+        log.info("Find an location by Id");
         return webClient
                 .get()
                 .uri("/location/" + id)
@@ -43,6 +47,7 @@ public class RickAndMortyClient {
     }
 
     public Mono<EpisodeResponse> findEpisodeById(String id) {
+        log.info("Find an episode by id");
         return webClient
                 .get()
                 .uri("/episode/" + id)
@@ -53,7 +58,15 @@ public class RickAndMortyClient {
                 .bodyToMono(EpisodeResponse.class);
     }
 
-
-
-
+    public Flux<ListOfEpisodesResponse> findAllEpisodes() {
+        log.info("List All Episodes");
+        return webClient
+                .get()
+                .uri("/episode")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        error -> Mono.error(new RuntimeException("Check the informed parameters")))
+                .bodyToFlux(ListOfEpisodesResponse.class);
+    }
 }

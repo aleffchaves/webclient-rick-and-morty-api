@@ -3,12 +3,14 @@ package com.alef.webclientrickandmortyapi.controller;
 import com.alef.webclientrickandmortyapi.client.RickAndMortyClient;
 import com.alef.webclientrickandmortyapi.response.CharacterResponse;
 import com.alef.webclientrickandmortyapi.response.EpisodeResponse;
+import com.alef.webclientrickandmortyapi.response.ListOfEpisodesResponse;
 import com.alef.webclientrickandmortyapi.response.LocationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -33,5 +35,9 @@ public class RickAndMortyController {
         return rickAndMortyClient.findEpisodeById(id);
     }
 
+    @GetMapping("/episodes")
+    public Flux<ListOfEpisodesResponse> listAllEpisodes() {
+        return rickAndMortyClient.findAllEpisodes();
+    }
 
 }
