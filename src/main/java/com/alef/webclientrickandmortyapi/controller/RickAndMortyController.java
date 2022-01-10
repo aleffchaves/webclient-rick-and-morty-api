@@ -2,6 +2,7 @@ package com.alef.webclientrickandmortyapi.controller;
 
 import com.alef.webclientrickandmortyapi.client.RickAndMortyClient;
 import com.alef.webclientrickandmortyapi.response.CharacterResponse;
+import com.alef.webclientrickandmortyapi.response.EpisodeResponse;
 import com.alef.webclientrickandmortyapi.response.LocationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,11 @@ public class RickAndMortyController {
     public Mono<LocationResponse> getLocationById(@PathVariable String id) {
         return rickAndMortyClient.findLocationById(id);
     }
+
+    @GetMapping("/episode/{id}")
+    public Mono<EpisodeResponse> getEpisodeById(@PathVariable String id) {
+        return rickAndMortyClient.findEpisodeById(id);
+    }
+
 
 }
