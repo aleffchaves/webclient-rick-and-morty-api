@@ -1,9 +1,17 @@
-package com.alef.webclientrickandmortyapi.response;
+package com.alef.webclientrickandmortyapi.responses;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CharacterResponse {
     private String id;

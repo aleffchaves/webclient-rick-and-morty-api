@@ -1,4 +1,4 @@
-package com.alef.webclientrickandmortyapi.response;
+package com.alef.webclientrickandmortyapi.responses;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
